@@ -13,25 +13,38 @@ import Typography from "@mui/material/Typography";
 export default function OutlinedCard({ data }) {
     return (
         <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">
+            <Card
+                style={{ backgroundColor: data.status != "ok" && "#FF7F7F" }}
+                variant="outlined"
+            >
                 <React.Fragment>
                     <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                        <Typography
+                            sx={{ fontSize: 14 }}
+                            color="text.secondary"
+                            gutterBottom
+                        >
+                            <b>Patient ID : </b>
                             {data._id}
                         </Typography>
                         <Typography variant="h5" component="div">
-                            {data.name}
+                            <b>Patient Name : </b> {data.name}
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {data.age}
+                            <b>Patient Age : </b> {data.age}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            <b>Patient Status : </b> {data.status}
                         </Typography>
                         <Typography variant="body2">
-                            {data.profile}
+                            <b>Patient Profile : </b> {data.profile}
                             <br />
                         </Typography>
                     </CardContent>
                     <CardActions>
-                    <a href = {`patient/${data._id}`}><Button size="small">Learn More</Button></a>
+                        <a href={`patient/${data._id}`}>
+                            <Button size="small">Learn More</Button>
+                        </a>
                     </CardActions>
                 </React.Fragment>
             </Card>

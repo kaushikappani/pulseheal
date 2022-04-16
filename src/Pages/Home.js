@@ -44,7 +44,7 @@ const Home = () => {
         fetch(); 
     },[])
     return (
-        <Grid container spacing={2}>
+        <Grid style={{marginTop:"10px"}} container spacing={5}>
             {
                 data.map(e => {
                     return (
