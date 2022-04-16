@@ -14,8 +14,16 @@ const patientSchema = mongoose.Schema({
     problem: String,
     profile: String,
     phoneNumber: String,
-  address: String,
-    status:String,
+    address: String,
+  status: String,
+  temperature: {
+    type: String,
+    default:0,
+  },
+    pulseRate: {
+      type: String,
+      default: 0
+    }
 })
 const Patient = mongoose.model("Patient", patientSchema);
 
@@ -73,15 +81,26 @@ app.get("/patients", async(req, res) => {
   const data = await Patient.find({});
   res.send(data);
 })
+let patientData = {};
 app.get("/patient/:id", async (req, res) => {
   const id = req.params.id;
   const data = await Patient.findById(id);
-  console.log(data);
+  console.log({data,patientData});
   res.send(data);
 })
-app.post("/patient/data", (req, res) => {
+
+app.post("/patient/data", async(req, res) => {
   console.log(req.body);
+  patientData = req.body;
+  const data = await Patient.findByIdAndUpdate(req.body.id, {
+    temperature: req.body.temperature,
+    pulseRate: req.body.pulseRate,
+  });
   res.send("done");
+  console.log(patientData);
+})
+app.get("/patient/data/", (req, res) => {
+  res.send(patientData);
 })
 
 app.listen(5000, () => {

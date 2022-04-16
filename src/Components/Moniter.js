@@ -15,14 +15,17 @@ const Moniter = () => {
     phoneNumber: "",
     address:""
   });
+  const [tempData, setTempdata] = React.useState({});
   const fetch = async() => {
-    const { data } = await axios.get("http://localhost:5000/patient/" + id);
+    const { data,patientData } = await axios.get("http://localhost:5000/patient/" + id);
     setData(data);
+    
     console.log(data);
   }
   React.useEffect(() => {
     fetch();
   }, [])
+  
   
   return (
     <Grid container>
@@ -34,6 +37,8 @@ const Moniter = () => {
           <Typography variant="h6">Patinet Health Profile: {data.profile} </Typography>
           <Typography variant="h6">Patinet Phone Number:{data.phoneNumber} </Typography>
           <Typography variant="h6">Patinet Address: { data.address} </Typography>
+          <Typography variant="h6">pulseRate: { data.pulseRate} </Typography>
+          <Typography variant="h6">Patinet Temperature: { data.temperature} </Typography>
         </div>
       </Grid>
       <Grid style={{minHeight:"200px"}} item lg={4}>
