@@ -7,11 +7,11 @@ const char* ssid = "J7 max";
 const char* password = "chinnu2204";
 
 // Domain Name with full URL Path for HTTP POST Request
-const char* server = "http://192.168.43.10:5000/update";
+const char* server = "http://192.168.97.147:5000/patient/data";
 String a;
 
 #include "DHT.h"
-#define DHTPIN 10
+#define DHTPIN 2
 #define DHTTYPE DHT11 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -61,7 +61,7 @@ void loop() {
       
       http.addHeader("Content-Type", "application/json");
       // Data to send with HTTP POST
-      String httpRequestData =  "{\"id\":10,\"pulseRate\":"+String(pulse) +",\"temperature\":"+String(t) +",\"monitor\":\"\"}";           
+      String httpRequestData =  "{\"id\":\"625aa3a0c77ae7c2cce800e1\",\"pulseRate\":"+String(pulse) +",\"temperature\":"+String(37)+",\"monitor\":\"\"}";           
       // Send HTTP POST request
       int httpResponseCode = http.POST(httpRequestData);
      
